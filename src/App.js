@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import {Counters} from './components/Counters';
+import {CounterSum} from './components/CounterSum';
+import {CounterSizeGenerator} from './components/CounterSizeGenerator';
+import {Header} from './components/Header';
 
-function App() {
+export default function App() {
+
+  const [counterSize, setCounterSize] = useState(1);
+  const [counterSum, setCounterSum] = useState(0);
+
+  const incrementCounterSum = () =>
+    setCounterSum(counterSum + 1)
+
+  const decrementCounterSum = () =>
+    setCounterSum(counterSum - 1)
+
+  const updateCounterSize = (newSize) => {
+    setCounterSize(newSize);
+    setCounterSum(0);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header/>
+      <CounterSizeGenerator
+        counterSize={counterSize}
+        updateCounterSize={updateCounterSize}
+      />
+      <Counters
+        size={counterSize}
+        incrementSum={incrementCounterSum}
+        decrementSum={decrementCounterSum}
+      />
+      <CounterSum
+        sum={counterSum}
+      />
+    </>
   );
 }
-
-export default App;
