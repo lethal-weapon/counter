@@ -1,24 +1,24 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {resetCounterSum, updateCounterSize} from '../store/actions/CounterAction';
 
-export function CounterSizeGenerator({
-                                       counterSize,
-                                       updateCounterSize
-                                     }) {
-  const [size, setSize] = useState(counterSize);
+export const CounterSizeGenerator = () => {
+  const dispatch = useDispatch();
+  const counterSize = useSelector((state) => state.counterSize);
 
   const handleSizeChange = (e) => {
     let newSize = parseInt(e.target.value.toString());
     if (newSize >= 1 && newSize <= 5 && newSize !== counterSize) {
-      setSize(newSize);
-      updateCounterSize(newSize);
+      dispatch(updateCounterSize(newSize));
+      dispatch(resetCounterSum());
     }
   }
 
-  const generateSize = () => {
+  const generateNewCounterWithRandomSize = () => {
     const newSize = 1 + Math.floor(Math.random() * 5);
-    if (newSize !== size) {
-      setSize(newSize);
-      updateCounterSize(newSize);
+    if (newSize !== counterSize) {
+      dispatch(updateCounterSize(newSize));
+      dispatch(resetCounterSum());
     }
   }
 
@@ -35,13 +35,13 @@ export function CounterSizeGenerator({
                    min="1"
                    max="5"
                    className="ps-4 fs-2 fw-bold text-warning bg-transparent border-0"
-                   value={size}
+                   value={counterSize}
                    onChange={handleSizeChange}
             />
           </div>
           <div className="col-4 text-md-start">
             <button className="mt-1 btn btn-outline-light fs-5"
-                    onClick={generateSize}
+                    onClick={generateNewCounterWithRandomSize}
             >
               Generate
             </button>

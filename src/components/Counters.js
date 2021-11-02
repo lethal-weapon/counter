@@ -1,27 +1,21 @@
 import React, {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import {Counter} from './Counter';
 
-export function Counters({
-                           size,
-                           incrementSum,
-                           decrementSum
-                         }) {
+export const Counters = () => {
+  const counterSize = useSelector((state) => state.counterSize);
   const [counterList, setCounterList] = useState([]);
 
   useEffect(() => {
-    const array = new Array(size).fill(Date.now());
+    const array = new Array(counterSize).fill(Date.now());
     setCounterList(array);
-  }, [size]);
+  }, [counterSize]);
 
   return (
     <>
       {
         counterList.map((item, index) =>
-          <Counter
-            key={item + index}
-            incrementSum={incrementSum}
-            decrementSum={decrementSum}
-          />
+          <Counter key={item + index}/>
         )
       }
     </>

@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {decrementCounterSum, incrementCounterSum} from '../store/actions/CounterAction';
 
-export function Counter({
-                          incrementSum,
-                          decrementSum
-                        }) {
+export const Counter = () => {
+  const dispatch = useDispatch();
   const [number, setNumber] = useState(0);
 
   const increment = () => {
     setNumber(number + 1);
-    incrementSum();
+    dispatch(incrementCounterSum());
   }
 
   const decrement = () => {
     setNumber(number - 1);
-    decrementSum();
+    dispatch(decrementCounterSum());
   }
 
   return (
@@ -29,7 +29,9 @@ export function Counter({
             </button>
           </div>
           <div className="col-4 text-center">
-            <span className="fs-3 hvr-cursor-default">{number}</span>
+            <span className="fs-3 hvr-cursor-default">
+              {number}
+            </span>
           </div>
           <div className="col-4 text-md-start">
             <button className="btn btn-outline-light"

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function Header() {
+export const Header = () => {
   return (
     <header className="m-5 hvr-cursor-default">
       <div className="text-black">

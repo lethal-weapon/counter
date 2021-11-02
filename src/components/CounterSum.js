@@ -1,6 +1,9 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 
-export function CounterSum({sum}) {
+export const CounterSum = () => {
+  const counterSum = useSelector((state) => state.counterSum);
+
   return (
     <div className="row m-5 hvr-cursor-default">
       <div className="col-12 col-md-4"/>
@@ -10,7 +13,7 @@ export function CounterSum({sum}) {
             Sum:
           </div>
           <div className="col-6 fs-1 fw-bold text-warning">
-            {sum}
+            {counterSum}
           </div>
         </div>
       </div>
