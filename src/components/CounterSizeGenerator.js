@@ -8,7 +8,7 @@ export function CounterSizeGenerator({
 
   const handleSizeChange = (e) => {
     let newSize = parseInt(e.target.value.toString());
-    if (newSize >= 1 && newSize <= 5) {
+    if (newSize >= 1 && newSize <= 5 && newSize !== counterSize) {
       setSize(newSize);
       updateCounterSize(newSize);
     }

@@ -9,7 +9,7 @@ export function Counters({
   const [counterList, setCounterList] = useState([]);
 
   useEffect(() => {
-    const array = new Array(size).fill(1);
+    const array = new Array(size).fill(Date.now());
     setCounterList(array);
   }, [size]);
 
@@ -18,7 +18,7 @@ export function Counters({
       {
         counterList.map((item, index) =>
           <Counter
-            key={index}
+            key={item + index}
             incrementSum={incrementSum}
             decrementSum={decrementSum}
           />
